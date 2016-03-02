@@ -16,8 +16,7 @@
     GMSMapView *mapView_;
     
     UITextField *selectedTextField;
-    
-    GMSMutablePath *path;
+    NSMutableArray *arrayMaker;
 }
 
 @end
@@ -60,9 +59,16 @@
             // error to do
         }];
         
+ 
+        
+        GMSMutablePath * path = [GMSMutablePath path];
+        
+        for(GMSMarker *mk in arrayMaker){
+            [path addCoordinate:mk.position];
+        }
+        
         GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
         polyline.map = mapView_;
-
         
         return;
     }
@@ -102,7 +108,7 @@
     // Show control to map.
     self.controlView.frame = CGRectMake(0, 0, _size.width, 130);
     self.controlView.translatesAutoresizingMaskIntoConstraints = YES;
-    
+    self.controlView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
     [self.navigationController.view addSubview:self.controlView];
     
 }
@@ -126,12 +132,12 @@
     marker.userData = (selectedTextField == self.txtStart)? self.txtStart : self.txtEnd;
     
     marker.map = mapView_;
-
-    if(!path){
-        path = [GMSMutablePath path];
+    
+    if(!arrayMaker){
+        arrayMaker = [NSMutableArray array];
     }
-
-    [path addCoordinate:place.coordinate];
+    
+    [arrayMaker addObject:marker];
     
     //move to Maker
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:place.coordinate.latitude
@@ -183,6 +189,16 @@
             } else {
                 self.txtStart.text = STRING(@"%@ %@ %@",address.thoroughfare,address.subLocality,address.country);
             }
+            
+            GMSMutablePath * path = [GMSMutablePath path];
+            
+            for(GMSMarker *mk in arrayMaker){
+                [path addCoordinate:mk.position];
+            }
+            
+            GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
+            polyline.strokeColor = [self randomColor];
+            polyline.map = mapView_;
         }
     }];
 }
@@ -196,6 +212,13 @@
     } else {
         return screenSize1;
     }
+}
+
+- (UIColor *)randomColor {
+    CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
+    CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
+    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
+    return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
 }
 
 @end

@@ -45,6 +45,7 @@
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2WD-VO-qhw">
                                         <rect key="frame" x="8" y="98" width="89" height="30"/>
+                                        <color key="backgroundColor" red="0.8723563762626263" green="0.87076663225511985" blue="0.86394076491533356" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="89" id="5Ph-P8-769"/>
                                             <constraint firstAttribute="height" constant="30" id="Gbh-wH-16b"/>
@@ -56,6 +57,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJg-dZ-VQK">
                                         <rect key="frame" x="122" y="98" width="89" height="30"/>
+                                        <color key="backgroundColor" red="0.8723563762626263" green="0.87076663225511985" blue="0.86394076491533356" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="ABS-ai-pLt"/>
                                             <constraint firstAttribute="width" constant="89" id="qik-J0-hva"/>

@@ -28,6 +28,7 @@
     NSScanner *scanner = [NSScanner scannerWithString:str];
     return [scanner scanInteger:NULL] && [scanner isAtEnd];
 }
+
 - (void)errorParse:(DidGetResultBlock)errHandler dictionary:(NSDictionary *)jsonDict {
     
 }
