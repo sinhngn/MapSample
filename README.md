@@ -1,5 +1,7 @@
 # MapSample
 
+0. Download source code
+
 1. mở terminal and type:
    $ cd /Users/NS/Downloads/MapSample-NewBrank
    
