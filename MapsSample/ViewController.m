@@ -1,0 +1,201 @@
+//
+//  ViewController.m
+//  MapsSample
+//
+//  Created by NS on 3/2/16.
+//  Copyright © 2016 Sinhngn. All rights reserved.
+//
+
+#import "ViewController.h"
+#import "ShareData.h"
+#define STRING(karg,...)  [NSString stringWithFormat:(karg),##__VA_ARGS__]
+
+@interface ViewController () {
+    
+    GMSPlacesClient *_placesClient;
+    GMSMapView *mapView_;
+    
+    UITextField *selectedTextField;
+    
+    GMSMutablePath *path;
+}
+
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    //load map to View
+    [self loadMaps];
+    
+    // new a GMS Place Client
+    _placesClient = [[GMSPlacesClient alloc] init];
+    
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Button event
+- (IBAction)btnTouchUpInside:(id)sender {
+    
+    if(sender == self.btnClear){
+        
+        [mapView_ clear];
+        self.txtEnd.text = @"";
+        self.txtStart.text = @"";
+        
+        return;
+    }
+    
+    if(sender == self.btnDirection){
+        //get Root from api
+        [[ShareData instance].directionsProxy getDirection:@"1 lu gia HO chi minh" destination:@"10 lu gia ho chi minh" key:GOOGLE_API_KEY completed:^(id result, NSString *errorCode, NSString *message) {
+            //todo ...
+        } error:^(id result, NSString *errorCode, NSString *message) {
+            // error to do
+        }];
+        
+        GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
+        polyline.map = mapView_;
+
+        
+        return;
+    }
+}
+
+- (IBAction)txtTouchDown:(id)sender {
+    //Autocomplete
+    if(sender ==  self.txtEnd || sender == self.txtStart){
+        
+        selectedTextField = sender;
+        
+        GMSAutocompleteViewController *acController = [[GMSAutocompleteViewController alloc] init];
+        acController.delegate = self;
+        [self presentViewController:acController animated:YES completion:nil];
+    }
+}
+
+
+#pragma mark - GOOGLE MAPS FUNCTION
+
+- (void)loadMaps{
+    
+    CGSize _size = [self screenSizeBound];
+    
+    //Ho Chi Minh 10.7704985,106.6533653,
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:10.7704985
+                                                            longitude:106.6533653
+                                                                 zoom:16];
+    
+    mapView_ = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    mapView_.delegate = self;
+    mapView_.myLocationEnabled = YES;
+    
+    //assign map (showing)
+    self.view = mapView_;
+    
+    // Show control to map.
+    self.controlView.frame = CGRectMake(0, 0, _size.width, 130);
+    self.controlView.translatesAutoresizingMaskIntoConstraints = YES;
+    
+    [self.navigationController.view addSubview:self.controlView];
+    
+}
+
+#pragma mark - Delegate for GMSAutocompleteViewController
+// Handle the user's selection.
+- (void)viewController:(GMSAutocompleteViewController *)viewController didAutocompleteWithPlace:(GMSPlace *)place {
+    
+    // dismiss view controller
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    //set adrress to textfield
+    selectedTextField.text = place.formattedAddress;
+    
+    //add Maker
+    GMSMarker *marker = [[GMSMarker alloc] init];
+    marker.position = place.coordinate;
+    marker.title =  place.name;
+    marker.snippet = place.formattedAddress;
+    marker.draggable = YES;
+    marker.userData = (selectedTextField == self.txtStart)? self.txtStart : self.txtEnd;
+    
+    marker.map = mapView_;
+
+    if(!path){
+        path = [GMSMutablePath path];
+    }
+
+    [path addCoordinate:place.coordinate];
+    
+    //move to Maker
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:place.coordinate.latitude
+                                                            longitude:place.coordinate.longitude
+                                                                 zoom:16];
+    [mapView_ setCamera:camera];
+    
+}
+
+- (void)viewController:(GMSAutocompleteViewController *)viewController didFailAutocompleteWithError:(NSError *)error {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    NSLog(@"Error: %@", [error description]);
+}
+
+// User canceled the operation.
+- (void)wasCancelled:(GMSAutocompleteViewController *)viewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+// Turn the network activity indicator on and off again.
+- (void)didRequestAutocompletePredictions:(GMSAutocompleteViewController *)viewController {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+}
+
+- (void)didUpdateAutocompletePredictions:(GMSAutocompleteViewController *)viewController {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
+
+#pragma mark - Delegate for MapView
+
+- (void)mapView:(GMSMapView *)mapView didEndDraggingMarker:(GMSMarker *)marker {
+    
+    CLLocationCoordinate2D addressCoordinates = marker.position;
+    
+    GMSGeocoder* coder = [[GMSGeocoder alloc] init];
+    [coder reverseGeocodeCoordinate:addressCoordinates completionHandler:^(GMSReverseGeocodeResponse *results, NSError *error) {
+        
+        if (error) {
+            NSLog(@"Error %@", error.description);
+        } else {
+            
+            GMSAddress* address = [results firstResult];
+            
+            marker.title =  address.thoroughfare;
+            marker.snippet = address.locality;
+            
+            if(marker.userData == self.txtEnd){
+                self.txtEnd.text = STRING(@"%@ %@ %@",address.thoroughfare,address.subLocality,address.country);
+            } else {
+                self.txtStart.text = STRING(@"%@ %@ %@",address.thoroughfare,address.subLocality,address.country);
+            }
+        }
+    }];
+}
+
+#pragma mark - function
+- (CGSize)screenSizeBound {
+    CGSize screenSize1 = [UIScreen mainScreen].bounds.size;
+    
+    if ((NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_7_1) && UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+        return CGSizeMake(screenSize1.height, screenSize1.width);
+    } else {
+        return screenSize1;
+    }
+}
+
+@end
