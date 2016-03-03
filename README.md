@@ -22,12 +22,13 @@ https://cocoapods.org
 
 Thank you.
 ------
-Vấn đề về Router (GOOGlE Direction) <br/>
+Vấn đề về Router (Google Direction api) <br/><br/>
 IOS Client............................My Server.........................Google Direction API<br/>
 |-------------- GetDirection------->|.........................................|<br/>
 |....................................................|----------getDirection --->|<br/>
 |....................................................|<----- array coordinates--|<br/>
 |<------- [(lat,long),....]-------------|<br/>
+|<br/>
 |--------<br/>
 |..........|<br/>
 |......(DRAW LINE to MAP)<br/>
