@@ -2,7 +2,7 @@
 
 Please get new key api from google map api and open AppDeleaget.h change <br/>
 
-#define  GOOGLE_API_KEY @"AIzaSyBG5Gc-wMw_rEMgL7HUGDEmnUL6QNfzY90"
+define  GOOGLE_API_KEY @"AIzaSyBG5Gc-wMw_rEMgL7HUGDEmnUL6QNfzY90"
 
 0. Download source code
 
