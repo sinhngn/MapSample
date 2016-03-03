@@ -23,7 +23,7 @@ https://cocoapods.org
 Thank you.
 ------
 Vấn đề về Router (GOOGlE Direction) <br/>
-IOS Client.........................My Server.........................Google Direction API<br/>
+IOS Client............................My Server.........................Google Direction API<br/>
 |-------------- GetDirection------->|.........................................|<br/>
 |....................................................|----------getDirection --->|<br/>
 |....................................................|<----- array coordinates--|<br/>
