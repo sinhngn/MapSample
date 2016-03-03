@@ -26,12 +26,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //Set up layout
+    [self setupLayout];
+    
     //load map to View
     [self loadMaps];
     
     // new a GMS Place Client
     _placesClient = [[GMSPlacesClient alloc] init];
     
+}
+
+- (void)setupLayout{
+    self.btnClear.layer.cornerRadius = 10.;
+    self.btnDirection.layer.cornerRadius = 10.;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,13 +61,11 @@
     
     if(sender == self.btnDirection){
         //get Root from api
-        [[ShareData instance].directionsProxy getDirection:@"1 lu gia HO chi minh" destination:@"10 lu gia ho chi minh" key:GOOGLE_API_KEY completed:^(id result, NSString *errorCode, NSString *message) {
+        /*[[ShareData instance].directionsProxy getDirection:@"1 lu gia HO chi minh" destination:@"10 lu gia ho chi minh" key:GOOGLE_API_KEY completed:^(id result, NSString *errorCode, NSString *message) {
             //todo ...
         } error:^(id result, NSString *errorCode, NSString *message) {
             // error to do
-        }];
-        
- 
+        }];*/
         
         GMSMutablePath * path = [GMSMutablePath path];
         
@@ -82,10 +88,10 @@
         
         GMSAutocompleteViewController *acController = [[GMSAutocompleteViewController alloc] init];
         acController.delegate = self;
+        
         [self presentViewController:acController animated:YES completion:nil];
     }
 }
-
 
 #pragma mark - GOOGLE MAPS FUNCTION
 
@@ -106,22 +112,29 @@
     self.view = mapView_;
     
     // Show control to map.
-    self.controlView.frame = CGRectMake(0, 0, _size.width, 130);
+    self.controlView.frame = CGRectMake(0, 0, _size.width, 140);
     self.controlView.translatesAutoresizingMaskIntoConstraints = YES;
-    self.controlView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
+    self.controlView.backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.4];
     [self.navigationController.view addSubview:self.controlView];
     
 }
 
 #pragma mark - Delegate for GMSAutocompleteViewController
+
 // Handle the user's selection.
 - (void)viewController:(GMSAutocompleteViewController *)viewController didAutocompleteWithPlace:(GMSPlace *)place {
     
     // dismiss view controller
     [self dismissViewControllerAnimated:YES completion:nil];
     
+    NSString *displayAdress = place.formattedAddress;
+    
+    if([place.formattedAddress componentsSeparatedByString:@","].count == 1){
+        displayAdress = STRING(@"%@ %@", place.name, place.formattedAddress);
+    }
+    
     //set adrress to textfield
-    selectedTextField.text = place.formattedAddress;
+    selectedTextField.text = displayAdress;
     
     //add Maker
     GMSMarker *marker = [[GMSMarker alloc] init];
@@ -138,6 +151,23 @@
     }
     
     [arrayMaker addObject:marker];
+    
+    // auto zoom when two Maker
+    if(arrayMaker.count == 2){
+        
+        CLLocationCoordinate2D lc1 = ((GMSMarker*)[arrayMaker objectAtIndex:0]).position;
+        CLLocationCoordinate2D lc2 = ((GMSMarker*)[arrayMaker objectAtIndex:1]).position;
+        
+        GMSCoordinateBounds *bounds =   [[GMSCoordinateBounds alloc] initWithCoordinate:lc1
+                                                                             coordinate:lc2 ];
+        
+        GMSCameraPosition *camera = [mapView_ cameraForBounds:bounds insets:UIEdgeInsetsZero];
+        
+        mapView_.camera = camera;
+        
+        return;
+    }
+    
     
     //move to Maker
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:place.coordinate.latitude

@@ -32,7 +32,7 @@
                                             <action selector="txtTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="85L-fT-nuJ"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ex: 60 lu gia, ho chi minh" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hwY-PH-RCN">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ex: 60 lu gia ho chi minh" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hwY-PH-RCN">
                                         <rect key="frame" x="8" y="60" width="584" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="pXD-s9-Ksb"/>
@@ -44,25 +44,29 @@
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2WD-VO-qhw">
-                                        <rect key="frame" x="8" y="98" width="89" height="30"/>
-                                        <color key="backgroundColor" red="0.8723563762626263" green="0.87076663225511985" blue="0.86394076491533356" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="8" y="98" width="100" height="30"/>
+                                        <color key="backgroundColor" red="0.20392156859999999" green="0.56862745100000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="89" id="5Ph-P8-769"/>
+                                            <constraint firstAttribute="width" constant="100" id="5Ph-P8-769"/>
                                             <constraint firstAttribute="height" constant="30" id="Gbh-wH-16b"/>
                                         </constraints>
-                                        <state key="normal" title="Get direction"/>
+                                        <state key="normal" title="Get direction">
+                                            <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="btnTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dHr-7A-4tT"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJg-dZ-VQK">
-                                        <rect key="frame" x="122" y="98" width="89" height="30"/>
-                                        <color key="backgroundColor" red="0.8723563762626263" green="0.87076663225511985" blue="0.86394076491533356" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="116" y="98" width="89" height="30"/>
+                                        <color key="backgroundColor" red="0.20392156859999999" green="0.56862745100000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="ABS-ai-pLt"/>
                                             <constraint firstAttribute="width" constant="89" id="qik-J0-hva"/>
                                         </constraints>
-                                        <state key="normal" title="Clear"/>
+                                        <state key="normal" title="Clear">
+                                            <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="btnTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="z8d-NH-fFM"/>
                                         </connections>
@@ -70,7 +74,7 @@
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="NJg-dZ-VQK" firstAttribute="leading" secondItem="2WD-VO-qhw" secondAttribute="trailing" constant="25" id="1uQ-uM-ueG"/>
+                                    <constraint firstItem="NJg-dZ-VQK" firstAttribute="leading" secondItem="2WD-VO-qhw" secondAttribute="trailing" constant="8" id="1uQ-uM-ueG"/>
                                     <constraint firstItem="2WD-VO-qhw" firstAttribute="top" secondItem="hwY-PH-RCN" secondAttribute="bottom" constant="8" id="3lr-Rw-GHa"/>
                                     <constraint firstAttribute="height" constant="130" id="52P-h1-aBc"/>
                                     <constraint firstItem="hwY-PH-RCN" firstAttribute="leading" secondItem="Ol5-Hv-crt" secondAttribute="leading" constant="8" id="CfX-bP-vhL"/>
