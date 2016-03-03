@@ -67,6 +67,20 @@
             // error to do
         }];*/
         
+        NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+        
+        if([[self.txtStart.text  stringByTrimmingCharactersInSet:whitespace] isEqualToString:@""]){
+            selectedTextField = self.txtStart;
+            [self showAutocompleteView];
+            return;
+        }
+        
+        if([[self.txtEnd.text  stringByTrimmingCharactersInSet:whitespace] isEqualToString:@""]){
+            selectedTextField = self.txtEnd;
+            [self showAutocompleteView];
+            return;
+        }
+        
         GMSMutablePath * path = [GMSMutablePath path];
         
         for(GMSMarker *mk in arrayMaker){
@@ -86,11 +100,15 @@
         
         selectedTextField = sender;
         
-        GMSAutocompleteViewController *acController = [[GMSAutocompleteViewController alloc] init];
-        acController.delegate = self;
-        
-        [self presentViewController:acController animated:YES completion:nil];
+        [self showAutocompleteView];
     }
+}
+
+- (void)showAutocompleteView {
+    GMSAutocompleteViewController *acController = [[GMSAutocompleteViewController alloc] init];
+    acController.delegate = self;
+    
+    [self presentViewController:acController animated:YES completion:nil];
 }
 
 #pragma mark - GOOGLE MAPS FUNCTION
