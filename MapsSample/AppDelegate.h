@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define  GOOGLE_API_KEY @"AIzaSyC9eEwlcvdEOpZsHbzGEygB1Lq_98gJkak"
+#define  GOOGLE_API_KEY @"AIzaSyBG5Gc-wMw_rEMgL7HUGDEmnUL6QNfzY90"//@"AIzaSyC9eEwlcvdEOpZsHbzGEygB1Lq_98gJkak"
 
 @import GoogleMaps;
 

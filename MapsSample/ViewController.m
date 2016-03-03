@@ -51,7 +51,7 @@
 - (IBAction)btnTouchUpInside:(id)sender {
     
     if(sender == self.btnClear){
-        
+        arrayMaker = nil;
         [mapView_ clear];
         self.txtEnd.text = @"";
         self.txtStart.text = @"";
@@ -176,12 +176,14 @@
         CLLocationCoordinate2D lc1 = ((GMSMarker*)[arrayMaker objectAtIndex:0]).position;
         CLLocationCoordinate2D lc2 = ((GMSMarker*)[arrayMaker objectAtIndex:1]).position;
         
-        GMSCoordinateBounds *bounds =   [[GMSCoordinateBounds alloc] initWithCoordinate:lc1
-                                                                             coordinate:lc2 ];
+        CLLocationCoordinate2D myLocation = ((GMSMarker *)arrayMaker.firstObject).position;
+        GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithCoordinate:myLocation coordinate:myLocation];
         
-        GMSCameraPosition *camera = [mapView_ cameraForBounds:bounds insets:UIEdgeInsetsZero];
+        for (GMSMarker *marker in arrayMaker)
+            bounds = [bounds includingCoordinate:marker.position];
         
-        mapView_.camera = camera;
+        [mapView_ animateWithCameraUpdate:[GMSCameraUpdate fitBounds:bounds withPadding:15.0f]];
+
         
         return;
     }
