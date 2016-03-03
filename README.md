@@ -16,21 +16,21 @@
 Với chức năng drag điểm, thì long touch (chạm vào điểm đó khoảng 1-2 giây) vào điểm đó và di chuyển đến điểm cần
 
 ----
-ref:
-https://developers.google.com/maps/
+ref:<br/>
+https://developers.google.com/maps/<br/>
 https://cocoapods.org 
 
 Thank you.
 ------
-Vấn đề về Router (GOOGlE Direction)
-IOS Client                       My Server               Google Direction API
- -------------- GetDirection------->|                            |
-                                    |-----------getDirection --->|
-                                    |<------- array coordinates--|
-|<------- [(lat,long),....]---------|
-|--------
-|       |
-|  (DRAW LINE to MAP)
-|       |
-|<-------
+Vấn đề về Router (GOOGlE Direction) <br/>
+IOS Client                       My Server               Google Direction API<br/>
+ -------------- GetDirection------->|                            |<br/>
+                                    |-----------getDirection --->|<br/>
+                                    |<------- array coordinates--|<br/>
+|<------- [(lat,long),....]---------|<br/>
+|--------<br/>
+|       |<br/>
+|  (DRAW LINE to MAP)<br/>
+|       |<br/>
+|<-------<br/>
 DONE
