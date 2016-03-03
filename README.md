@@ -1,6 +1,6 @@
 # MapSample
 
-Please get new key api from google map api and open AppDeleaget.h change <br/>
+Please get new key api from google map api (https://developers.google.com/maps/ios/) and open AppDelegate.h change <br/>
 
 define  GOOGLE_API_KEY @"AIzaSyBG5Gc-wMw_rEMgL7HUGDEmnUL6QNfzY90"
 
