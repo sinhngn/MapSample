@@ -17,9 +17,9 @@
  */
 - (void)getDirection:(NSString *)star destination:(NSString *)end key:(NSString *)key
            completed:(DidGetResultBlock)complete error:(DidGetResultBlock)errHandler {
-
+//http://maps.googleapis.com/maps/api/directions/json?origin=10.7514429,106.7054975&destination=10.7589823,106.6965149&sensor=false
     BaseOperation * callOp = [[BaseOperation alloc] init];
-    NSString *urlStr = STRING(@"https://maps.googleapis.com/maps/api/directions/json?origin=%@&destination=%@&key=%@",star,end,key);
+    NSString *urlStr = STRING(@"https://maps.googleapis.com/maps/api/directions/json?origin=%@&destination=%@&sensor=false",star,end);
     NSString *encodedUrl = [urlStr stringByAddingPercentEscapesUsingEncoding:
                             NSUTF8StringEncoding];
     NSURL *url = [NSURL URLWithString:encodedUrl];
@@ -51,7 +51,13 @@
         return;
     }
     
-    //NSDictionary *jsonDict = [self.parser objectWithData:result];
+    NSDictionary *jsonDict = [self.parser objectWithData:result];
+    NSArray *router = [jsonDict objectForKey:@"routes"];
+    NSDictionary *dict = [router objectAtIndex:0];
+    NSDictionary *overview_polyline = [dict objectForKey:@"overview_polyline"];
+    NSString *str = [overview_polyline objectForKey:@"points"];
+    
+    handler(str,@"", @"");
 
 }
 

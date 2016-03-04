@@ -60,12 +60,6 @@
     }
     
     if(sender == self.btnDirection){
-        //get Root from api
-        /*[[ShareData instance].directionsProxy getDirection:@"1 lu gia HO chi minh" destination:@"10 lu gia ho chi minh" key:GOOGLE_API_KEY completed:^(id result, NSString *errorCode, NSString *message) {
-            //todo ...
-        } error:^(id result, NSString *errorCode, NSString *message) {
-            // error to do
-        }];*/
         
         NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
         
@@ -81,14 +75,32 @@
             return;
         }
         
-        GMSMutablePath * path = [GMSMutablePath path];
+        CLLocationCoordinate2D lc1 = ((GMSMarker*)[arrayMaker objectAtIndex:0]).position;
+        CLLocationCoordinate2D lc2 = ((GMSMarker*)[arrayMaker objectAtIndex:1]).position;
         
-        for(GMSMarker *mk in arrayMaker){
-            [path addCoordinate:mk.position];
-        }
+        //get Root from api
+        [[ShareData instance].directionsProxy getDirection:STRING(@"%f,%f",lc1.latitude,lc1.longitude)
+                                               destination:STRING(@"%f,%f",lc2.latitude,lc2.longitude)
+                                                       key:GOOGLE_API_KEY completed:^(id result, NSString *errorCode, NSString *message) {
+            //todo ...
+            
+            GMSPath *path = [GMSPath pathFromEncodedPath:result];
+            GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
+            polyline.map = mapView_;
+            
+        } error:^(id result, NSString *errorCode, NSString *message) {
+            // error to do
+        }];
         
-        GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
-        polyline.map = mapView_;
+        
+//        GMSMutablePath * path = [GMSMutablePath path];
+//        
+//        for(GMSMarker *mk in arrayMaker){
+//            [path addCoordinate:mk.position];
+//        }
+//        
+//        GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
+//        polyline.map = mapView_;
         
         return;
     }
@@ -240,15 +252,23 @@
                 self.txtStart.text = STRING(@"%@ %@ %@",address.thoroughfare,address.subLocality,address.country);
             }
             
-            GMSMutablePath * path = [GMSMutablePath path];
+            CLLocationCoordinate2D lc1 = ((GMSMarker*)[arrayMaker objectAtIndex:0]).position;
+            CLLocationCoordinate2D lc2 = ((GMSMarker*)[arrayMaker objectAtIndex:1]).position;
             
-            for(GMSMarker *mk in arrayMaker){
-                [path addCoordinate:mk.position];
-            }
-            
-            GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
-            polyline.strokeColor = [self randomColor];
-            polyline.map = mapView_;
+            //get Root from api
+            [[ShareData instance].directionsProxy getDirection:STRING(@"%f,%f",lc1.latitude,lc1.longitude)
+                                                   destination:STRING(@"%f,%f",lc2.latitude,lc2.longitude)
+                                                           key:GOOGLE_API_KEY completed:^(id result, NSString *errorCode, NSString *message) {
+                                                               //todo ...
+                                                               
+                                                               GMSPath *path = [GMSPath pathFromEncodedPath:result];
+                                                               GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
+                                                               polyline.map = mapView_;
+                                                               
+                                                           } error:^(id result, NSString *errorCode, NSString *message) {
+                                                               // error to do
+                                                           }];
+
         }
     }];
 }
