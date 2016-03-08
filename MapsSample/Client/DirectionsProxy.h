@@ -11,7 +11,9 @@
 
 @interface DirectionsProxy : BaseProxy
 
-- (void)getDirection:(NSString *)star destination:(NSString *)end key:(NSString *)key
-                 completed:(DidGetResultBlock)complete error:(DidGetResultBlock)errHandler;
+- (void)getDirection:(NSString *)star
+         destination:(NSString *)end
+           completed:(DidGetResultBlock)complete
+               error:(DidGetResultBlock)errHandler;
 
 @end

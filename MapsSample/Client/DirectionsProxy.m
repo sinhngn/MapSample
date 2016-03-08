@@ -15,9 +15,9 @@
 /*! POST User Login, item is a LoginUser Model class
  * @param completed is a Handler
  */
-- (void)getDirection:(NSString *)star destination:(NSString *)end key:(NSString *)key
+- (void)getDirection:(NSString *)star destination:(NSString *)end
            completed:(DidGetResultBlock)complete error:(DidGetResultBlock)errHandler {
-//http://maps.googleapis.com/maps/api/directions/json?origin=10.7514429,106.7054975&destination=10.7589823,106.6965149&sensor=false
+
     BaseOperation * callOp = [[BaseOperation alloc] init];
     NSString *urlStr = STRING(@"https://maps.googleapis.com/maps/api/directions/json?origin=%@&destination=%@&sensor=false",star,end);
     NSString *encodedUrl = [urlStr stringByAddingPercentEscapesUsingEncoding:

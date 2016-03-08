@@ -33,4 +33,5 @@ typedef void (^DidGetMessageBlock)(id data, NSString *name_error, NSString *erro
 @property (nonatomic, retain) SBJsonWriter *writer;
 
 - (void)errorParse:(DidGetResultBlock)errHandler dictionary:(NSDictionary *)jsonDict;
+
 @end

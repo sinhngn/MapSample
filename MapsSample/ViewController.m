@@ -14,6 +14,7 @@
     
     GMSPlacesClient *_placesClient;
     GMSMapView *mapView_;
+    GMSPolyline *polyline;
     
     UITextField *selectedTextField;
     NSMutableArray *arrayMaker;
@@ -78,29 +79,7 @@
         CLLocationCoordinate2D lc1 = ((GMSMarker*)[arrayMaker objectAtIndex:0]).position;
         CLLocationCoordinate2D lc2 = ((GMSMarker*)[arrayMaker objectAtIndex:1]).position;
         
-        //get Root from api
-        [[ShareData instance].directionsProxy getDirection:STRING(@"%f,%f",lc1.latitude,lc1.longitude)
-                                               destination:STRING(@"%f,%f",lc2.latitude,lc2.longitude)
-                                                       key:GOOGLE_API_KEY completed:^(id result, NSString *errorCode, NSString *message) {
-            //todo ...
-            
-            GMSPath *path = [GMSPath pathFromEncodedPath:result];
-            GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
-            polyline.map = mapView_;
-            
-        } error:^(id result, NSString *errorCode, NSString *message) {
-            // error to do
-        }];
-        
-        
-//        GMSMutablePath * path = [GMSMutablePath path];
-//        
-//        for(GMSMarker *mk in arrayMaker){
-//            [path addCoordinate:mk.position];
-//        }
-//        
-//        GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
-//        polyline.map = mapView_;
+        [self apiDrawDirectionFrom:lc1 destination:lc2];
         
         return;
     }
@@ -183,10 +162,7 @@
     [arrayMaker addObject:marker];
     
     // auto zoom when two Maker
-    if(arrayMaker.count == 2){
-        
-        CLLocationCoordinate2D lc1 = ((GMSMarker*)[arrayMaker objectAtIndex:0]).position;
-        CLLocationCoordinate2D lc2 = ((GMSMarker*)[arrayMaker objectAtIndex:1]).position;
+    if(arrayMaker.count > 1){
         
         CLLocationCoordinate2D myLocation = ((GMSMarker *)arrayMaker.firstObject).position;
         GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithCoordinate:myLocation coordinate:myLocation];
@@ -195,7 +171,7 @@
             bounds = [bounds includingCoordinate:marker.position];
         
         [mapView_ animateWithCameraUpdate:[GMSCameraUpdate fitBounds:bounds withPadding:15.0f]];
-
+        
         
         return;
     }
@@ -255,22 +231,33 @@
             CLLocationCoordinate2D lc1 = ((GMSMarker*)[arrayMaker objectAtIndex:0]).position;
             CLLocationCoordinate2D lc2 = ((GMSMarker*)[arrayMaker objectAtIndex:1]).position;
             
-            //get Root from api
-            [[ShareData instance].directionsProxy getDirection:STRING(@"%f,%f",lc1.latitude,lc1.longitude)
-                                                   destination:STRING(@"%f,%f",lc2.latitude,lc2.longitude)
-                                                           key:GOOGLE_API_KEY completed:^(id result, NSString *errorCode, NSString *message) {
-                                                               //todo ...
-                                                               
-                                                               GMSPath *path = [GMSPath pathFromEncodedPath:result];
-                                                               GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
-                                                               polyline.map = mapView_;
-                                                               
-                                                           } error:^(id result, NSString *errorCode, NSString *message) {
-                                                               // error to do
-                                                           }];
-
+            [self apiDrawDirectionFrom:lc1 destination:lc2];
         }
+        
     }];
+}
+
+#pragma mark - API CALLER
+
+/*! Get API Direction and draw*/
+- (void)apiDrawDirectionFrom:(CLLocationCoordinate2D )lc1  destination:(CLLocationCoordinate2D )lc2 {
+    
+    [[ShareData instance].directionsProxy getDirection:STRING(@"%f,%f",lc1.latitude,lc1.longitude)
+                                           destination:STRING(@"%f,%f",lc2.latitude,lc2.longitude)
+                                             completed:^(id result, NSString *errorCode, NSString *message) {
+                                                 
+                                                 
+                                                 GMSPath *path = [GMSPath pathFromEncodedPath:result];
+                                                 if(polyline){
+                                                     polyline.map = nil;
+                                                     polyline = nil;
+                                                 }
+                                                 polyline = [GMSPolyline polylineWithPath:path];
+                                                 polyline.map = mapView_;
+                                                 
+                                             } error:^(id result, NSString *errorCode, NSString *message) {
+                                                 [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Lost connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                                             }];
 }
 
 #pragma mark - function
