@@ -23,6 +23,8 @@
 
 - (IBAction)btnTouchUpInside:(id)sender;
 - (IBAction)txtTouchDown:(id)sender;
+- (void)showAutocompleteView;
 
+- (void)apiDrawDirectionFrom:(CLLocationCoordinate2D )lc1  destination:(CLLocationCoordinate2D )lc2;
 @end
 

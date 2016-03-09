@@ -51,13 +51,22 @@
         return;
     }
     
-    NSDictionary *jsonDict = [self.parser objectWithData:result];
-    NSArray *router = [jsonDict objectForKey:@"routes"];
-    NSDictionary *dict = [router objectAtIndex:0];
-    NSDictionary *overview_polyline = [dict objectForKey:@"overview_polyline"];
-    NSString *str = [overview_polyline objectForKey:@"points"];
+    @try {
+        NSDictionary *jsonDict = [self.parser objectWithData:result];
+        NSArray *router = [jsonDict objectForKey:@"routes"];
+        NSDictionary *dict = [router objectAtIndex:0];
+        NSDictionary *overview_polyline = [dict objectForKey:@"overview_polyline"];
+        NSString *str = [overview_polyline objectForKey:@"points"];
+        
+        handler(str,@"OK", @"");
+    }
+    @catch (NSException *exception) {
+        handler(@"",@"ERROR", @"");
+    }
+    @finally {
+        
+    }
     
-    handler(str,@"", @"");
 
 }
 

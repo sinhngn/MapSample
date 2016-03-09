@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F57146D1C8FCCF10034A40A /* MapsSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F57146C1C8FCCF10034A40A /* MapsSampleTests.m */; };
+		4F5714751C8FCE000034A40A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F5714741C8FCE000034A40A /* libPods.a */; };
 		4FC3EC491C86CAAF00063418 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC3EC481C86CAAF00063418 /* main.m */; };
 		4FC3EC4C1C86CAAF00063418 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC3EC4B1C86CAAF00063418 /* AppDelegate.m */; };
 		4FC3EC4F1C86CAAF00063418 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC3EC4E1C86CAAF00063418 /* ViewController.m */; };
@@ -32,9 +34,23 @@
 		6222A28367B8AC824FDA7F90 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 35098CFCEA9F0F649547A292 /* libPods.a */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		4F57146F1C8FCCF10034A40A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4FC3EC3C1C86CAAF00063418 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4FC3EC431C86CAAF00063418;
+			remoteInfo = MapsSample;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		295D86549EF282EE3574FF8B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		35098CFCEA9F0F649547A292 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F57146A1C8FCCF10034A40A /* MapsSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MapsSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F57146C1C8FCCF10034A40A /* MapsSampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapsSampleTests.m; sourceTree = "<group>"; };
+		4F57146E1C8FCCF10034A40A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4F5714741C8FCE000034A40A /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/../build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		4FC3EC441C86CAAF00063418 /* MapsSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapsSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FC3EC481C86CAAF00063418 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4FC3EC4A1C86CAAF00063418 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -82,6 +98,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4F5714671C8FCCF10034A40A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F5714751C8FCE000034A40A /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4FC3EC411C86CAAF00063418 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -93,10 +117,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F57146B1C8FCCF10034A40A /* MapsSampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				4F57146C1C8FCCF10034A40A /* MapsSampleTests.m */,
+				4F57146E1C8FCCF10034A40A /* Info.plist */,
+			);
+			path = MapsSampleTests;
+			sourceTree = "<group>";
+		};
 		4FC3EC3B1C86CAAF00063418 = {
 			isa = PBXGroup;
 			children = (
 				4FC3EC461C86CAAF00063418 /* MapsSample */,
+				4F57146B1C8FCCF10034A40A /* MapsSampleTests */,
 				4FC3EC451C86CAAF00063418 /* Products */,
 				DEF67AF3C70F232EF86BA49C /* Pods */,
 				F858FC2A55CC542D398B1833 /* Frameworks */,
@@ -107,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				4FC3EC441C86CAAF00063418 /* MapsSample.app */,
+				4F57146A1C8FCCF10034A40A /* MapsSampleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -196,6 +231,7 @@
 		F858FC2A55CC542D398B1833 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4F5714741C8FCE000034A40A /* libPods.a */,
 				35098CFCEA9F0F649547A292 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -204,6 +240,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		4F5714691C8FCCF10034A40A /* MapsSampleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4F5714731C8FCCF10034A40A /* Build configuration list for PBXNativeTarget "MapsSampleTests" */;
+			buildPhases = (
+				4F5714661C8FCCF10034A40A /* Sources */,
+				4F5714671C8FCCF10034A40A /* Frameworks */,
+				4F5714681C8FCCF10034A40A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4F5714701C8FCCF10034A40A /* PBXTargetDependency */,
+			);
+			name = MapsSampleTests;
+			productName = MapsSampleTests;
+			productReference = 4F57146A1C8FCCF10034A40A /* MapsSampleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		4FC3EC431C86CAAF00063418 /* MapsSample */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4FC3EC5B1C86CAB000063418 /* Build configuration list for PBXNativeTarget "MapsSample" */;
@@ -233,6 +287,10 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = Sinhngn;
 				TargetAttributes = {
+					4F5714691C8FCCF10034A40A = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = 4FC3EC431C86CAAF00063418;
+					};
 					4FC3EC431C86CAAF00063418 = {
 						CreatedOnToolsVersion = 7.2.1;
 						SystemCapabilities = {
@@ -257,11 +315,19 @@
 			projectRoot = "";
 			targets = (
 				4FC3EC431C86CAAF00063418 /* MapsSample */,
+				4F5714691C8FCCF10034A40A /* MapsSampleTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4F5714681C8FCCF10034A40A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4FC3EC421C86CAAF00063418 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -323,6 +389,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4F5714661C8FCCF10034A40A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F57146D1C8FCCF10034A40A /* MapsSampleTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4FC3EC401C86CAAF00063418 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -351,6 +425,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		4F5714701C8FCCF10034A40A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4FC3EC431C86CAAF00063418 /* MapsSample */;
+			targetProxy = 4F57146F1C8FCCF10034A40A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		4FC3EC501C86CAAF00063418 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -371,6 +453,40 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		4F5714711C8FCCF10034A40A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 295D86549EF282EE3574FF8B /* Pods.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = MapsSampleTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sinhngn.MapsSampleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MapsSample.app/MapsSample";
+			};
+			name = Debug;
+		};
+		4F5714721C8FCCF10034A40A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B6D07B66AB230135C60B729 /* Pods.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = MapsSampleTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sinhngn.MapsSampleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MapsSample.app/MapsSample";
+			};
+			name = Release;
+		};
 		4FC3EC591C86CAB000063418 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -407,6 +523,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_HEADERS_SEARCH_PATHS}",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -445,6 +565,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_HEADERS_SEARCH_PATHS}",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
@@ -482,6 +606,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4F5714731C8FCCF10034A40A /* Build configuration list for PBXNativeTarget "MapsSampleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4F5714711C8FCCF10034A40A /* Debug */,
+				4F5714721C8FCCF10034A40A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		4FC3EC3F1C86CAAF00063418 /* Build configuration list for PBXProject "MapsSample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
